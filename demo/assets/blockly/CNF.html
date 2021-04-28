@@ -1,0 +1,1360 @@
+<html lang="en"><head><style>.blocklySvg {
+background-color: #f0f0f0;
+outline: none;
+overflow: hidden;
+position: absolute;
+display: block;
+}
+.blocklyWidgetDiv {
+display: none;
+position: absolute;
+z-index: 99999;
+}
+.injectionDiv {
+height: 100%;
+position: relative;
+overflow: hidden;
+touch-action: none;
+}
+.blocklyNonSelectable {
+user-select: none;
+-ms-user-select: none;
+-webkit-user-select: none;
+}
+.blocklyWsDragSurface {
+display: none;
+position: absolute;
+top: 0;
+left: 0;
+}
+.blocklyWsDragSurface.blocklyOverflowVisible {
+overflow: visible;
+}
+.blocklyBlockDragSurface {
+display: none;
+position: absolute;
+top: 0;
+left: 5;
+right: 0;
+bottom: 0;
+overflow: visible !important;
+z-index: 50;
+}
+.blocklyBlockCanvas.blocklyCanvasTransitioning,
+.blocklyBubbleCanvas.blocklyCanvasTransitioning {
+transition: transform .5s;
+}
+.blocklyTooltipDiv {
+background-color: #ffffc7;
+border: 1px solid #ddc;
+box-shadow: 4px 4px 20px 1px rgba(0,0,0,.15);
+color: #000;
+display: none;
+font-family: sans-serif;
+font-size: 9pt;
+opacity: .9;
+padding: 2px;
+position: absolute;
+z-index: 100000;
+}
+.blocklyDropDownDiv {
+position: fixed;
+left: 0;
+top: 0;
+z-index: 1000;
+display: none;
+border: 1px solid;
+border-radius: 2px;
+padding: 4px;
+box-shadow: 0px 0px 3px 1px rgba(0,0,0,.3);
+}
+.blocklyDropDownDiv.focused {
+box-shadow: 0px 0px 6px 1px rgba(0,0,0,.3);
+}
+.blocklyDropDownContent {
+max-height: 300px;
+overflow: auto;
+overflow-x: hidden;
+}
+.blocklyDropDownArrow {
+position: absolute;
+left: 0;
+top: 0;
+width: 16px;
+height: 16px;
+z-index: -1;
+background-color: inherit;
+border-color: inherit;
+}
+.blocklyDropDownButton {
+display: inline-block;
+float: left;
+padding: 0;
+margin: 4px;
+border-radius: 4px;
+outline: none;
+border: 1px solid;
+transition: box-shadow .1s;
+cursor: pointer;
+}
+.arrowTop {
+border-top: 1px solid;
+border-left: 1px solid;
+border-top-left-radius: 4px;
+border-color: inherit;
+}
+.arrowBottom {
+border-bottom: 1px solid;
+border-right: 1px solid;
+border-bottom-right-radius: 4px;
+border-color: inherit;
+}
+.blocklyResizeSE {
+cursor: se-resize;
+fill: #aaa;
+}
+.blocklyResizeSW {
+cursor: sw-resize;
+fill: #aaa;
+}
+.blocklyResizeLine {
+stroke: #515A5A;
+stroke-width: 1;
+}
+.blocklyHighlightedConnectionPath {
+fill: none;
+stroke: #fc3;
+stroke-width: 4px;
+}
+.blocklyPathLight {
+fill: none;
+stroke-linecap: round;
+stroke-width: 1;
+}
+.blocklySelected>.blocklyPath {
+stroke: #fc3;
+stroke-width: 3px;
+}
+.blocklySelected>.blocklyPathLight {
+display: none;
+}
+.blocklyDraggable {
+cursor: url("./media/handopen.cur"), auto;
+cursor: grab;
+cursor: -webkit-grab;
+}
+.blocklyDragging {
+cursor: url("./media/handclosed.cur"), auto;
+cursor: grabbing;
+cursor: -webkit-grabbing;
+}
+.blocklyDraggable:active {
+cursor: url("./media/handclosed.cur"), auto;
+cursor: grabbing;
+cursor: -webkit-grabbing;
+}
+.blocklyBlockDragSurface .blocklyDraggable {
+cursor: url("./media/handclosed.cur"), auto;
+cursor: grabbing;
+cursor: -webkit-grabbing;
+}
+.blocklyDragging.blocklyDraggingDelete {
+cursor: url("./media/handdelete.cur"), auto;
+}
+.blocklyDragging>.blocklyPath,
+.blocklyDragging>.blocklyPathLight {
+fill-opacity: .8;
+stroke-opacity: .8;
+}
+.blocklyDragging>.blocklyPathDark {
+display: none;
+}
+.blocklyDisabled>.blocklyPath {
+fill-opacity: .5;
+stroke-opacity: .5;
+}
+.blocklyDisabled>.blocklyPathLight,
+.blocklyDisabled>.blocklyPathDark {
+display: none;
+}
+.blocklyInsertionMarker>.blocklyPath,
+.blocklyInsertionMarker>.blocklyPathLight,
+.blocklyInsertionMarker>.blocklyPathDark {
+fill-opacity: .2;
+stroke: none
+}
+.blocklyReplaceable .blocklyPath {
+fill-opacity: .5;
+}
+.blocklyReplaceable .blocklyPathLight,
+.blocklyReplaceable .blocklyPathDark {
+display: none;
+}
+.blocklyText {
+cursor: default;
+fill: #fff;
+font-family: sans-serif;
+font-size: 11pt;
+}
+.blocklyMultilineText {
+font-family: monospace;
+}
+.blocklyNonEditableText>text {
+pointer-events: none;
+}
+.blocklyNonEditableText>rect,
+.blocklyEditableText>rect {
+fill: #fff;
+fill-opacity: .6;
+}
+.blocklyNonEditableText>text,
+.blocklyEditableText>text {
+fill: #000;
+}
+.blocklyEditableText:hover>rect {
+stroke: #fff;
+stroke-width: 2;
+}
+.blocklyBubbleText {
+fill: #000;
+}
+.blocklyFlyout {
+position: absolute;
+z-index: 20;
+}
+.blocklySvg text, .blocklyBlockDragSurface text {
+user-select: none;
+-ms-user-select: none;
+-webkit-user-select: none;
+cursor: inherit;
+}
+.blocklyHidden {
+display: none;
+}
+.blocklyFieldDropdown:not(.blocklyHidden) {
+display: block;
+}
+.blocklyIconGroup {
+cursor: default;
+}
+.blocklyIconGroup:not(:hover),
+.blocklyIconGroupReadonly {
+opacity: .6;
+}
+.blocklyIconShape {
+fill: #00f;
+stroke: #fff;
+stroke-width: 1px;
+}
+.blocklyIconSymbol {
+fill: #fff;
+}
+.blocklyMinimalBody {
+margin: 0;
+padding: 0;
+}
+.blocklyCommentForeignObject {
+position: relative;
+z-index: 0;
+}
+.blocklyCommentRect {
+fill: #E7DE8E;
+stroke: #bcA903;
+stroke-width: 1px
+}
+.blocklyCommentTarget {
+fill: transparent;
+stroke: #bcA903;
+}
+.blocklyCommentTargetFocused {
+fill: none;
+}
+.blocklyCommentHandleTarget {
+fill: none;
+}
+.blocklyCommentHandleTargetFocused {
+fill: transparent;
+}
+.blocklyFocused>.blocklyCommentRect {
+fill: #B9B272;
+stroke: #B9B272;
+}
+.blocklySelected>.blocklyCommentTarget {
+stroke: #fc3;
+stroke-width: 3px;
+}
+.blocklyCommentTextarea {
+background-color: #fef49c;
+border: 0;
+outline: 0;
+margin: 0;
+padding: 3px;
+resize: none;
+display: block;
+overflow: hidden;
+}
+.blocklyCommentDeleteIcon {
+cursor: pointer;
+fill: #000;
+display: none
+}
+.blocklySelected > .blocklyCommentDeleteIcon {
+display: block
+}
+.blocklyDeleteIconShape {
+fill: #000;
+stroke: #000;
+stroke-width: 1px;
+}
+.blocklyDeleteIconShape.blocklyDeleteIconHighlighted {
+stroke: #fc3;
+}
+.blocklyHtmlInput {
+border: none;
+border-radius: 4px;
+font-family: sans-serif;
+height: 100%;
+margin: 0;
+outline: none;
+padding: 0;
+width: 100%;
+text-align: center;
+}
+.blocklyHtmlInput::-ms-clear {
+display: none;
+}
+.blocklyMainBackground {
+stroke-width: 1;
+stroke: #c6c6c6;
+}
+.blocklyMutatorBackground {
+fill: #fff;
+stroke: #ddd;
+stroke-width: 1;
+}
+.blocklyFlyoutBackground {
+fill: #ddd;
+fill-opacity: .8;
+}
+.blocklyMainWorkspaceScrollbar {
+z-index: 20;
+}
+.blocklyFlyoutScrollbar {
+z-index: 30;
+}
+.blocklyScrollbarHorizontal, .blocklyScrollbarVertical {
+position: absolute;
+outline: none;
+}
+.blocklyScrollbarBackground {
+opacity: 0;
+}
+.blocklyScrollbarHandle {
+fill: #fafafa;
+}
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyScrollbarHandle:hover {
+fill: #bbb;
+}
+.blocklyFlyout .blocklyScrollbarHandle {
+fill: #bbb;
+}
+.blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyFlyout .blocklyScrollbarHandle:hover {
+fill: #aaa;
+}
+.blocklyInvalidInput {
+background: #faa;
+}
+.blocklyContextMenu {
+border-radius: 4px;
+max-height: 100%;
+}
+.blocklyDropdownMenu {
+border-radius: 2px;
+padding: 0 !important;
+}
+.blocklyWidgetDiv .blocklyDropdownMenu .goog-menuitem,
+.blocklyDropDownDiv .blocklyDropdownMenu .goog-menuitem {
+padding-left: 28px;
+}
+.blocklyWidgetDiv .blocklyDropdownMenu .goog-menuitem.goog-menuitem-rtl,
+.blocklyDropDownDiv .blocklyDropdownMenu .goog-menuitem.goog-menuitem-rtl {
+padding-left: 5px;
+padding-right: 28px;
+}
+.blocklyVerticalCursor {
+stroke-width: 3px;
+fill: rgba(255,255,255,.5);
+}
+.blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,
+.blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-option-selected .goog-menuitem-checkbox,
+.blocklyDropDownDiv .goog-option-selected .goog-menuitem-icon {
+background: url(./media/sprites.png) no-repeat -48px -16px;
+}
+.blocklyWidgetDiv .goog-menu {
+background: #fff;
+border-color: transparent;
+border-style: solid;
+border-width: 1px;
+cursor: default;
+font: normal 13px Arial, sans-serif;
+margin: 0;
+outline: none;
+padding: 4px 0;
+position: absolute;
+overflow-y: auto;
+overflow-x: hidden;
+max-height: 100%;
+z-index: 20000;
+box-shadow: 0px 0px 3px 1px rgba(0,0,0,.3);
+}
+.blocklyWidgetDiv .goog-menu.focused {
+box-shadow: 0px 0px 6px 1px rgba(0,0,0,.3);
+}
+.blocklyDropDownDiv .goog-menu {
+cursor: default;
+font: normal 13px "Helvetica Neue", Helvetica, sans-serif;
+outline: none;
+z-index: 20000;
+}
+.blocklyWidgetDiv .goog-menuitem,
+.blocklyDropDownDiv .goog-menuitem {
+color: #000;
+font: normal 13px Arial, sans-serif;
+list-style: none;
+margin: 0;
+min-width: 7em;
+border: none;
+padding: 6px 15px;
+white-space: nowrap;
+cursor: pointer;
+}
+.blocklyWidgetDiv .goog-menu-nocheckbox .goog-menuitem,
+.blocklyWidgetDiv .goog-menu-noicon .goog-menuitem,
+.blocklyDropDownDiv .goog-menu-nocheckbox .goog-menuitem,
+.blocklyDropDownDiv .goog-menu-noicon .goog-menuitem {
+padding-left: 12px;
+}
+.blocklyWidgetDiv .goog-menuitem-content,
+.blocklyDropDownDiv .goog-menuitem-content {
+font: normal 13px Arial, sans-serif;
+}
+.blocklyWidgetDiv .goog-menuitem-content {
+color: #000;
+}
+.blocklyDropDownDiv .goog-menuitem-content {
+color: #000;
+}
+.blocklyWidgetDiv .goog-menuitem-disabled,
+.blocklyDropDownDiv .goog-menuitem-disabled {
+cursor: inherit;
+}
+.blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-content,
+.blocklyDropDownDiv .goog-menuitem-disabled .goog-menuitem-content {
+color: #ccc !important;
+}
+.blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-menuitem-disabled .goog-menuitem-icon {
+opacity: .3;
+filter: alpha(opacity=30);
+}
+.blocklyWidgetDiv .goog-menuitem-highlight ,
+.blocklyDropDownDiv .goog-menuitem-highlight {
+background-color: rgba(0,0,0,.1);
+}
+.blocklyWidgetDiv .goog-menuitem-checkbox,
+.blocklyWidgetDiv .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-menuitem-checkbox,
+.blocklyDropDownDiv .goog-menuitem-icon {
+background-repeat: no-repeat;
+height: 16px;
+left: 6px;
+position: absolute;
+right: auto;
+vertical-align: middle;
+width: 16px;
+}
+.blocklyWidgetDiv .goog-menuitem-rtl .goog-menuitem-checkbox,
+.blocklyWidgetDiv .goog-menuitem-rtl .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-menuitem-rtl .goog-menuitem-checkbox,
+.blocklyDropDownDiv .goog-menuitem-rtl .goog-menuitem-icon {
+left: auto;
+right: 6px;
+}
+.blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,
+.blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-option-selected .goog-menuitem-checkbox,
+.blocklyDropDownDiv .goog-option-selected .goog-menuitem-icon {
+position: static;
+float: left;
+margin-left: -24px;
+}
+.blocklyWidgetDiv .goog-menuitem-rtl .goog-menuitem-checkbox,
+.blocklyWidgetDiv .goog-menuitem-rtl .goog-menuitem-icon,
+.blocklyDropDownDiv .goog-menuitem-rtl .goog-menuitem-checkbox,
+.blocklyDropDownDiv .goog-menuitem-rtl .goog-menuitem-icon {
+float: right;
+margin-right: -24px;
+}
+.blocklyAngleCircle {
+stroke: #444;
+stroke-width: 1;
+fill: #ddd;
+fill-opacity: .8;
+}
+.blocklyAngleMarks {
+stroke: #444;
+stroke-width: 1;
+}
+.blocklyAngleGauge {
+fill: #f88;
+fill-opacity: .8;
+pointer-events: none;
+}
+.blocklyAngleLine {
+stroke: #f00;
+stroke-width: 2;
+stroke-linecap: round;
+pointer-events: none;
+}
+.blocklyColourTable {
+border-collapse: collapse;
+display: block;
+outline: none;
+padding: 1px;
+}
+.blocklyColourTable>tr>td {
+border: .5px solid #888;
+box-sizing: border-box;
+cursor: pointer;
+display: inline-block;
+height: 20px;
+padding: 0;
+width: 20px;
+}
+.blocklyColourTable>tr>td.blocklyColourHighlighted {
+border-color: #eee;
+box-shadow: 2px 2px 7px 2px rgba(0,0,0,.3);
+position: relative;
+}
+.blocklyColourSelected, .blocklyColourSelected:hover {
+border-color: #eee !important;
+outline: 1px solid #333;
+position: relative;
+}
+.blocklyHtmlTextAreaInput {
+font-family: monospace;
+resize: none;
+overflow: hidden;
+height: 100%;
+text-align: left;
+}
+.blocklyFlyoutButton {
+fill: #888;
+cursor: default;
+}
+.blocklyFlyoutButtonShadow {
+fill: #666;
+}
+.blocklyFlyoutButton:hover {
+fill: #aaa;
+}
+.blocklyFlyoutLabel {
+cursor: default;
+}
+.blocklyFlyoutLabelBackground {
+opacity: 0;
+}
+.blocklyFlyoutLabelText {
+fill: #000;
+}
+.blocklyToolboxDelete {
+cursor: url("./media/handdelete.cur"), auto;
+}
+.blocklyToolboxGrab {
+cursor: url("./media/handclosed.cur"), auto;
+cursor: grabbing;
+cursor: -webkit-grabbing;
+}
+.blocklyToolboxDiv {
+background-color: #f0f0f0;
+overflow-x: visible;
+overflow-y: auto;
+position: absolute;
+z-index: 70;
+width:160px;
+-webkit-tap-highlight-color: transparent;
+}
+.blocklyTreeRoot {
+padding: 50px 0;
+}
+.blocklyTreeRoot:focus {
+outline: none;
+}
+.blocklyTreeRow {
+height: 50px;
+line-height: 50px;
+margin-bottom: 0px;
+background-color:#ffffff;
+padding-right: 8px;
+white-space: nowrap;
+}
+.blocklyHorizontalTree {
+float: left;
+margin: 1px 5px 8px 0px;
+}
+.blocklyHorizontalTreeRtl {
+float: right;
+margin: 1px 0 8px 5px;
+}
+.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {
+margin-left: 0px;
+}
+.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+background-color: #e4e4e4;
+}
+.blocklyTreeSeparator {
+border-bottom: solid #e5e5e5 1px;
+height: 0;
+margin: 5px 0;
+}
+.blocklyTreeSeparatorHorizontal {
+border-right: solid #e5e5e5 1px;
+width: 0;
+padding: 5px 0;
+margin: 0 5px;
+}
+.blocklyTreeIcon {
+background-image: url(./media/sprit.png);
+height: 25px;
+vertical-align: middle;
+width: 10px;
+padding: 0 5px;
+}
+.blocklyTreeIconClosedLtr {
+background-position: -32px -1px;
+}
+.blocklyTreeIconClosedRtl {
+background-position: 0 -1px;
+}
+.blocklyTreeIconOpen {
+background-position: -10px -1px;
+}
+.blocklyTreeSelected>.blocklyTreeIconClosedLtr {
+background-position: -32px -17px;
+}
+.blocklyTreeSelected>.blocklyTreeIconClosedRtl {
+background-position: 0 -17px;
+}
+.blocklyTreeSelected>.blocklyTreeIconOpen {
+background-position: -16px -17px;
+}
+.blocklyTreeIconNone,
+.blocklyTreeSelected>.blocklyTreeIconNone {
+background-position: -48px -1px;
+}
+.blocklyTreeLabel {
+cursor: default;
+font-family: sans-serif;
+font-size: 20px;
+padding: 0 10px;
+vertical-align: middle;
+}
+.blocklyToolboxDelete .blocklyTreeLabel {
+cursor: url("./media/handdelete.cur"), auto;
+}
+.blocklyTreeSelected .blocklyTreeLabel {
+color: #fff;
+}
+.blocklyZoom>image, .blocklyZoom>svg>image {
+opacity: .4;
+}
+.blocklyZoom>image:hover, .blocklyZoom>svg>image:hover {
+opacity: .6;
+}
+.blocklyZoom>image:active, .blocklyZoom>svg>image:active {
+opacity: .8;
+}</style>
+	<meta charset="UTF-8">
+	<title>websocket</title>
+	<script src="blockly_compressed.js"></script>
+	<script src="blocks_compressed.js"></script>
+	<script src="python_compressed.js"></script>
+	<script src="msg/js/zh-hant.js"></script>
+
+	<script src="generators/python/logic.js"></script>
+	<script src="generators/python/loops.js"></script>
+	<script src="generators/python/math.js"></script>
+	<script src="generators/python/text.js"></script>
+	<script src="generators/python/lists.js"></script>
+	<script src="generators/python/colour.js"></script>
+	<script src="generators/python/variables.js"></script>
+	<script src="generators/python/variables_dynamic.js"></script>
+	<script src="generators/python/procedures.js"></script>
+	<script src="generators/python.js"></script>
+	
+	<script src="blocks/logic.js"></script>
+	<script src="blocks/loops.js"></script>
+	<script src="blocks/math.js"></script>
+	<script src="blocks/text.js"></script>
+	<script src="blocks/lists.js"></script>
+	<script src="blocks/colour.js"></script>
+	<script src="blocks/variables.js"></script>
+	<script src="blocks/variables_dynamic.js"></script>
+	<script src="blocks/procedures.js"></script>
+	<script src="blocks/smartcar.js"></script>
+	<style>
+   html, body {
+      height: 100%;
+      margin: 0;
+	  padding:0;
+	  width:100%;
+	  border:0;
+    }
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    table {
+      height: 100%;
+      width: 100%;
+    }
+    #blocklyArea {
+      height: 99%;
+    }
+	
+	</style>	
+</head>
+
+<body>
+  <div id="blocklyDiv" >
+  </div>
+<div class="blocklyToolboxDiv blocklyNonSelectable" style="left: 0px;height:0px " dir="LTR"><div tabindex="0" class="blocklyTreeRoot" role="tree" aria-expanded="false" aria-selected="false" aria-level="0" aria-labelledby="blockly:0.label" aria-activedescendant="blockly:b" hidefocus="true"><div id="blockly:0" role="group"><div class="blocklyTreeRow blocklyHidden" id="blockly:0.label" role="presentation" style="padding-left: 5px;"><img class="blocklyTreeLabel" style="width: 40px; max-height: 100%;" src="undefined"><span class="blocklyTreeLabel"></span></div><div style="background-position: -100px 0px;"><div id="blockly:1" role="treeitem" aria-selected="false" aria-posinset="1" aria-setsize="11" aria-level="1" aria-labelledby="blockly:1.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(149, 255, 0); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:1.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/LOGIC.png"><span class="blocklyTreeLabel" style="color: rgb(0, 184, 83);">邏輯</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:2" role="treeitem" aria-selected="false" aria-posinset="2" aria-setsize="11" aria-level="1" aria-labelledby="blockly:2.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(254, 78, 78); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:2.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/LOOPS.png"><span class="blocklyTreeLabel" style="color: rgb(254, 78, 78);">循環</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:3" role="treeitem" aria-selected="false" aria-posinset="3" aria-setsize="11" aria-level="1" aria-labelledby="blockly:3.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(20, 255, 220); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:3.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/MATH.png"><span class="blocklyTreeLabel" style="color: rgb(20, 255, 220);">數學</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:4" role="treeitem" aria-selected="false" aria-posinset="4" aria-setsize="11" aria-level="1" aria-labelledby="blockly:4.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(245, 93, 62); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:4.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/TEXT.png"><span class="blocklyTreeLabel" style="color: rgb(245, 93, 62);">文本</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:5" role="treeitem" aria-selected="false" aria-posinset="5" aria-setsize="11" aria-level="1" aria-labelledby="blockly:5.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(230, 8, 110); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:5.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/LISTS.png"><span class="blocklyTreeLabel" style="color: rgb(230, 8, 110);">列表</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:6" role="treeitem" aria-selected="false" aria-posinset="6" aria-setsize="11" aria-level="1" aria-labelledby="blockly:6.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(92, 201, 186); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:6.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/INPUT.png"><span class="blocklyTreeLabel" style="color: rgb(92, 201, 186);">輸入</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:7" role="treeitem" aria-selected="false" aria-posinset="7" aria-setsize="11" aria-level="1" aria-labelledby="blockly:7.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(154, 77, 164); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:7.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/MUSIC.png"><span class="blocklyTreeLabel" style="color: rgb(154, 77, 164);">音樂</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:8" role="treeitem" aria-selected="false" aria-posinset="8" aria-setsize="11" aria-level="1" aria-labelledby="blockly:8.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(61, 212, 133); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:8.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/LED.png"><span class="blocklyTreeLabel" style="color: rgb(61, 212, 133);">LED</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:9" role="treeitem" aria-selected="false" aria-posinset="9" aria-setsize="11" aria-level="1" aria-labelledby="blockly:9.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(222, 31, 130); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:9.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/MOTION.png"><span class="blocklyTreeLabel" style="color: rgb(222, 31, 130);">運動</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:a" role="treeitem" aria-selected="false" aria-posinset="10" aria-setsize="11" aria-level="1" aria-labelledby="blockly:a.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(0, 181, 217); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:a.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/FUNCTIONS.png"><span class="blocklyTreeLabel" style="color: rgb(0, 181, 217);">函數</span></div><div role="group" style="background-position: 0px 0px; display: none;"></div></div><div id="blockly:b" role="treeitem" aria-selected="false" aria-posinset="11" aria-setsize="11" aria-level="1" aria-labelledby="blockly:b.label"><div class="blocklyTreeRow" style="padding-left: 5px; border-left-color: rgb(255, 0, 0); border-left-width: 0px; border-left-style: solid;"><img class="blocklyTreeLabel" id="blockly:b.label" role="presentation" style="width: 40px; max-height: 100%;" src="media/Variable.png"><span class="blocklyTreeLabel" style="color: rgb(255, 0, 0);">變量</span></div><div role="group" style="background-position: -100px 0px; display: none;"></div></div></div></div></div></div>
+ <xml id="toolbox-categories" style="display: none" xmlns="https://developers.google.com/blockly/xml">
+    <category colour="00B853" name="Logic">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_ternary"></block>
+    </category>
+    <category colour="FE4E4E" name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+	  <block type="wd"></block>
+      <block type="true"></block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_forEach"></block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category colour="14FFDC" name="Math">
+      <block type="math_number" gap="32">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_single">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_trig">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constant"></block>
+      <block type="math_number_property">
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_round">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_on_list"></block>
+      <block type="math_modulo">
+        <value name="DIVIDEND">
+          <shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        <value name="DIVISOR">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constrain">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="LOW">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="HIGH">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+      <block type="math_atan2">
+        <value name="X">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="Y">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category colour="F55D3E" name="Text">
+      <block type="text"></block>
+      <block type="text_multiline"></block>
+      <block type="text_join"></block>
+      <block type="text_append">
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+        <value name="FIND">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_charAt">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <value name="STRING">
+          <block type="variables_get">
+            <field name="VAR">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_count">
+        <value name="SUB">
+          <shadow type="text"></shadow>
+        </value>
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <block type="text_replace">
+        <value name="FROM">
+          <shadow type="text"></shadow>
+        </value>
+        <value name="TO">
+          <shadow type="text"></shadow>
+        </value>
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <block type="text_reverse">
+        <value name="TEXT">
+          <shadow type="text"></shadow>
+        </value>
+      </block>
+      <label web-class="ioLabel" text="Input/Output:"></label>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category colour="E6086E" name="Lists">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_repeat">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_length"></block>
+      <block type="lists_isEmpty"></block>
+      <block type="lists_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getSublist">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_split">
+        <value name="DELIM">
+          <shadow type="text">
+            <field name="TEXT">,</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_sort"></block>
+      <block type="lists_reverse"></block>
+    </category>
+	<category colour="5CC9BA" name="Input">
+	  <block type="input_acc"></block>
+	  <block type="car_attitude"></block>
+	  <block type="car_infrared"></block>
+    </category>
+	<category colour="9A4DA4" name="Music">
+	  
+	  <block type="sound"></block>
+	  <block type="music_update"></block>
+    </category>
+    
+    <category colour="3DD485" name="LED">  
+      <block type="time"></block>
+     
+      
+	  <block type="led_block_f"></block>
+	  <block type="led_block_b"></block>
+    </category>
+	<category colour="DE1F82" name="Motion">
+	  <block type="robot_motion"></block>
+	  <block type="car_brake"></block>
+	  <block type="car_flywheel"></block>
+    </category>
+    
+    
+    <category colour="00B5D9" name="Functions" custom="PROCEDURE"></category>
+	<category name="Variables" custom="VARIABLE" colour="FF0000">
+    </category>
+  </xml>
+	
+  
+	<script>
+	
+/*字符串解析成元素节点类型*/
+function parseElement(str) {
+	var o=document.createElement("div");
+	o.innerHTML=str;
+	return o.childNodes[0];
+}
+
+
+
+
+
+
+	
+	//var blocklyArea = document.getElementById('blocklyArea');
+	//Blockly.getMainWorkspace().setTheme(Blockly.Themes.Dark);
+    var blocklyDiv = document.getElementById('blocklyDiv');
+	Blockly.Trashcan.prototype.MARGIN_SIDE_=11;
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {
+		  
+		  comments: true,
+		  collapse: true,
+          disable: true,
+          zoom: {controls: true},
+          media: './media/',
+          toolbox: document.getElementById('toolbox-categories'),
+          maxTrashcanContents: 256,
+		 
+		}
+		
+        
+        );
+	
+    var onresize = function(e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = -3;
+      var y = -3;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth +6+ 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight+8+ 'px';
+      Blockly.svgResize(demoWorkspace);
+    };
+   // window.addEventListener('resize', onresize, false);
+   // onresize();
+   // Blockly.svgResize(demoWorkspace);
+	//	function save()
+	//	{
+	//			saveTextAsFile();
+		
+	//	}
+
+    function showCode() {
+      // Generate JavaScript code and display it.
+      // Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Python.workspaceToCode(demoWorkspace);
+      //console.log(code);
+      //document.getElementById('pythoncode').value=code;
+	  //alert("running");
+      //window.location.reload();  
+      alert(code);
+    }
+	function loadXML(file){
+try //Internet Explorer  
+{  
+ xmlDoc=new ActiveXObject("Microsoft.XMLDOM");  
+ xmlDoc.async=false;  
+ xmlDoc.load(file);  
+}  
+catch(e)  
+{  
+ try //Firefox, Mozilla, Opera, etc.  
+ {  
+  xmlDoc=document.implementation.createDocument("","",null);  
+  xmlDoc.async=false;  
+  xmlDoc.load(file);  
+ }  
+ catch(e)  
+ {  
+  try //Google Chrome  
+  {  
+   var xmlhttp = new window.XMLHttpRequest();  
+   xmlhttp.open("GET",file,false);  
+   xmlhttp.send(null);  
+   xmlDoc = xmlhttp.responseXML.documentElement;  
+  }  
+  catch(e)  
+  {  
+   alert("您的浏览器不能正常加载文件。请切换到兼容模式，或者更换浏览器"); 
+  }  
+ }  
+}  
+
+return xmlDoc;
+}
+	function getxmlDoc(xmlFile) {
+            var xmlDoc;
+            if (window.ActiveXObject) {
+                xmlDoc = new ActiveXObject('Microsoft.XMLDOM');//IE
+                xmlDoc.async = false;
+                xmlDoc.load(xmlFile);
+            }
+            else if (isFirefox=navigator.userAgent.indexOf("Firefox")>0) { //火狐
+
+                xmlDoc = document.implementation.createDocument('', '', null);
+                xmlDoc.load(xmlFile);
+            }
+            else{ //谷歌
+              var xmlhttp = new window.XMLHttpRequest();
+                xmlhttp.open("GET",xmlFile,false);
+                xmlhttp.send(null);
+                if(xmlhttp.readyState == 4){
+                xmlDoc = xmlhttp.responseXML.documentElement;
+                } 
+            }
+
+            return xmlDoc;
+        }
+    function saveTextAsFile() {
+		var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
+		var textToWrite=Blockly.Xml.domToPrettyText(xml);
+  		if(textToWrite)
+  		{
+  			var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
+  			var fileNameToSaveAs = "demo.xml";
+  			var downloadLink = document.createElement("a");
+  			downloadLink.download = fileNameToSaveAs;
+  			downloadLink.innerHTML = "Download File";
+  			if (window.webkitURL != null) {
+    		// Chrome allows the link to be clicked without actually adding it to the DOM.
+    		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+  			} else {
+   		 	// Firefox requires the link to be added to the DOM before it can be clicked.
+   		 	downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    		downloadLink.onclick = destroyClickedElement;
+   			downloadLink.style.display = "none";
+   			document.body.appendChild(downloadLink);
+  			}
+  			downloadLink.click();
+  		}else
+  			 alert("no python code");
+  		}
+		
+  		//var xmlDoc=loadXML("demo.xml");
+		
+		//Blockly.Xml.domToWorkspace(xmlDoc, demoWorkspace);
+		//alert(xmlDoc);
+		//var socket;
+		//var uri;
+		//var receive = [];
+		//var length = 0;
+		//document.getElementById("importExport").style.display="none";
+		//var input = document.getElementById('importExport');
+		//alert(input);
+		
+	 //alertObj(xmlDoc);
+	//console.log("******************");
+	//console.log(xmlDoc);
+    //var xmlDoc = Blockly.Xml.textToDom(input.value);	
+	alert(xmlDoc);
+	
+	
+		function Connect(uri) 
+		{
+			//alert("running!")
+    	socket = new WebSocket(uri);
+    	socket.binaryType = "arraybuffer";
+    	socket.onopen = function (e) 
+    	{
+    	  document.getElementById("output1").value="connect success!";
+        //console.log("已连接至服务器");
+    	};
+    	socket.onclose = function (e) {
+    	  document.getElementById("output1").value="connect failed,disconnect!";
+        //console.log("链接已关闭");
+    	};
+    	socket.onmessage = function (e) 
+    	{
+    	  //document.getElementById("output").innerHTML(e.data);
+        doReceive(e.data);
+   	 	};
+    	socket.onerror = function (e) {
+    	  document.getElementById("output1").value="connect  error,disconnect!";
+        //console.log("出现错误");
+    	};
+  	}
+		function getInputVal(){
+			var inputBox1 = document.getElementById("ip").value;
+			var inputBox2 = document.getElementById("port").value;	 
+			if(inputBox1&&inputBox2)
+			{
+				uri="ws://"+inputBox1+":"+inputBox2;
+				//alert(uri);
+				Connect(uri);	
+			}else{
+				alert('please input content!');
+			}
+		}
+		
+		function doReceive(buffer) {
+			alert("running  doReceive!")
+    	receive = receive.concat(Array.from(new Uint8Array(buffer)));
+    	if (receive.length < 4) {
+        return;
+    	}
+    	length = new DataView(new Uint8Array(receive).buffer).getUint32(0);
+    	if (receive.length < length + 4) {
+        return;
+    	}
+    	//var bytes = receive.slice(4, length + 4);
+   	 	//doSomething(bytes);
+
+    	//receive = receive.slice(length + 4);
+		};
+		function doSend(bytes) {
+    	var buffer = new ArrayBuffer(bytes.length + 4);
+    	var view = new DataView(buffer);
+    	view.setUint32(0, bytes.length);
+    	for (var i = 0; i < bytes.length; i++) {
+        view.setUint8(i + 4, bytes[i]);
+    	}
+    	socket.send(view);
+		};
+		function showInfoFromJava(msg)
+	{
+				 var temp=msg;
+				
+				var x= Blockly.Xml.textToDom(temp);
+				
+				demoWorkspace.clear();
+				
+				Blockly.Xml.domToWorkspace(x, demoWorkspace);
+				
+    }
+	
+	function test_fun(msg)
+	{
+		//alert(msg);
+		var xml = Blockly.Xml.workspaceToDom(demoWorkspace);
+	    var xml_text = Blockly.Xml.domToText(xml);
+		JavaScript: myObj.fun1FromAndroid(xml_text);
+	}
+	function clearWorkspace()
+	{
+	demoWorkspace.clear();
+	
+	}
+	function genePythonCode()
+	{
+	
+		var code=Blockly.Python.workspaceToCode(demoWorkspace);
+		JavaScript: myObj.receiveCode(code);
+	}
+	//var xml = Blockly.Xml.workspaceToDom(workspace);保存为html
+	//var xml_text = Blockly.Xml.domToText(xml);
+	  function nodeToString ( node ) {  
+    //createElement()返回一个Element对象
+   var tmpNode = document.createElement( "div" ); 
+   //appendChild()  参数Node对象   返回Node对象  Element方法
+   //cloneNode()  参数布尔类型  返回Node对象   Element方法
+   tmpNode.appendChild( node.cloneNode( true ) );  
+   var str = tmpNode.innerHTML;  
+   tmpNode = node = null; // prevent memory leaks in IE  
+   return str;  
+  } 
+  var domToStirng=function(htmlDOM){
+    if(outerHTML in htmlDOM){
+        return htmlDOM.outerHTML;
+    } else {
+        var div= document.createElement("div");
+        div.appendChild(htmlDOM);
+        return div.innerHTML
+    }
+}
+var stringToDom=function(htmlString){
+    var div= document.createElement("div");
+    div.innerHTML=html;
+    return div.children[0];
+}
+
+		</script>
+	
+
+
+</body></html>

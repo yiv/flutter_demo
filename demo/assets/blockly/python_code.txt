@@ -1,0 +1,140 @@
+Blockly.Python['music'] = function(block) {
+  Blockly.Python.definitions_['import_os'] = 'import os';
+  var dropdown_index = block.getFieldValue('INDEX');
+  var temp;
+  
+  var m1='play -n /oem/audio/music/1.wav';
+  var m2='play -n /oem/audio/music/2.wav';
+  var m3='play -n /oem/audio/music/3.wav';
+  var m4='play -n /oem/audio/music/4.wav';
+  var m5='play -n /oem/audio/music/5.wav';
+  var m6='play -n /oem/audio/music/6.wav';
+  var m7='play -n /oem/audio/music/7.wav';
+  switch(dropdown_index)
+  {
+	  case 'm1':
+	  temp='os.system('+'\''+m1+'\''+')'+'\n';
+	  break;
+	  case 'm2':
+	  temp='os.system('+'\''+m2+'\''+')'+'\n';
+	  break;
+	  case 'm3':
+	  temp='os.system('+'\''+m3+'\''+')'+'\n';
+	  break;
+	  case 'm4':
+	  temp='os.system('+'\''+m4+'\''+')'+'\n';
+	  break;
+	  case 'm5':
+	  temp='os.system('+'\''+m5+'\''+')'+'\n';
+	  break;
+	  case 'm6':
+	  temp='os.system('+'\''+m6+'\''+')'+'\n';
+	  break;
+	  case 'm7':
+	  temp='os.system('+'\''+m7+'\''+')'+'\n';
+	  break;
+  }
+  // TODO: Assemble Python into code variable.
+  //var code = '...\n';
+  return temp;
+};
+Blockly.Python['music_new'] = function(block) {
+  var temp1;
+  var temp2;
+  Blockly.Python.definitions_['import_os'] = 'import os';
+  var dropdown_a = block.getFieldValue('A');
+  var dropdown_b = block.getFieldValue('B');
+  switch(dropdown_b)
+  {
+	  case 'b1':
+	  temp1='0.25'
+	  break;
+	  case 'b2':
+	  temp1='0.5'
+	  break;
+	  case 'b3':
+	  temp1='0.75'
+	  break;
+	  
+	  case 'b4':
+	  temp1='1'
+	  break;
+	  case 'b5'
+	  temp1='0.375'
+	  break;
+	  case 'b6'
+	  temp1='0.75'
+      break;
+  }
+  
+  
+  
+  var temp;
+  
+  var m1='play '+'-d '+temp1+' -n /oem/audio/music/1.wav';
+  var m2='play '+'-d '+temp1+' -n /oem/audio/music/2.wav';
+  var m3='play '+'-d '+temp1+' -n /oem/audio/music/3.wav';
+  var m4='play '+'-d '+temp1+' -n /oem/audio/music/4.wav';
+  var m5='play '+'-d '+temp1+' -n /oem/audio/music/5.wav';
+  var m6='play '+'-d '+temp1+' -n /oem/audio/music/6.wav';
+  var m7='play '+'-d '+temp1+' -n /oem/audio/music/7.wav';
+  switch(dropdown_a)
+  {
+	  case 'm1':
+	  temp='os.system('+'\''+m1+'\''+')'+'\n';
+	  break;
+	  case 'm2':
+	  temp='os.system('+'\''+m2+'\''+')'+'\n';
+	  break;
+	  case 'm3':
+	  temp='os.system('+'\''+m3+'\''+')'+'\n';
+	  break;
+	  case 'm4':
+	  temp='os.system('+'\''+m4+'\''+')'+'\n';
+	  break;
+	  case 'm5':
+	  temp='os.system('+'\''+m5+'\''+')'+'\n';
+	  break;
+	  case 'm6':
+	  temp='os.system('+'\''+m6+'\''+')'+'\n';
+	  break;
+	  case 'm7':
+	  temp='os.system('+'\''+m7+'\''+')'+'\n';
+	  break;
+  }
+  // TODO: Assemble Python into code variable.
+  //var code = '...\n';
+  return temp;
+  
+};
+Blockly.Python['sound'] = function(block) {
+  Blockly.Python.definitions_['import_os'] = 'import os';
+  var dropdown_index = block.getFieldValue('INDEX');
+  var temp;
+  
+  
+  var m1='play -n /oem/audio/music/cat.wav';
+  var m2='play -n /oem/audio/music/dog.wav';
+  var m3='play -n /oem/audio/music/cow.wav';
+  var m4='play -n /oem/audio/music/lion.wav';
+  
+  switch(dropdown_index)
+  {
+	  case 'm1':
+	  temp='os.system('+'\''+m1+'\''+')'+'\n';
+	  break;
+	  case 'm2':
+	  temp='os.system('+'\''+m2+'\''+')'+'\n';
+	  break;
+	  case 'm3':
+	  temp='os.system('+'\''+m3+'\''+')'+'\n';
+	  break;
+	  case 'm4':
+	  temp='os.system('+'\''+m4+'\''+')'+'\n';
+	  break;
+	 
+  }
+  // TODO: Assemble Python into code variable.
+  //var code = '...\n';
+  return temp;
+};

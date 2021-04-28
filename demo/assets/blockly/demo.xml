@@ -1,0 +1,108 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block id="Gg{:-AGSr0Z2{*}mn6^v" type="led_block_f" y="12" x="87">
+    <field name="NAME1">FG</field>
+    <field name="NAME2">0</field>
+    <next>
+      <block id="T?uYG/Z~.h9x;Ns`%K^b" type="led_block_f">
+        <field name="NAME1">FR</field>
+        <field name="NAME2">0</field>
+        <next>
+          <block id="-j/r[1nFuW^k0y2Ge3Kh" type="led_block_b">
+            <field name="NAME1">BG</field>
+            <field name="Value">0</field>
+            <next>
+              <block id="gQj3#q:oEUC^.Lh18-d:" type="led_block_b">
+                <field name="NAME1">BR</field>
+                <field name="Value">0</field>
+                <next>
+                  <block id="7e0K;tfOI_6Y+zHmwa|K" type="controls_repeat_ext">
+                    <value name="TIMES">
+                      <shadow id="v?`[)%-)X0Ll1LOS+bEW" type="math_number">
+                        <field name="NUM">10</field>
+                      </shadow>
+                    </value>
+                    <statement name="DO">
+                      <block id="MeW75Ae%V6Yz0ej}dE@%" type="led_block_b">
+                        <field name="NAME1">BG</field>
+                        <field name="Value">100</field>
+                        <next>
+                          <block id="pPiWBLHvxyyRe0+uC70t" type="robot_motion">
+                            <field name="speed">0.4</field>
+                            <field name="rad">0</field>
+                            <next>
+                              <block id="Ng=+0HaE6HND7%}lZo^m" type="time">
+                                <field name="Time">0.1</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block id="95sq=Fw48=Tyk,V$6}kb" type="led_block_b">
+                        <field name="NAME1">BG</field>
+                        <field name="Value">0</field>
+                        <next>
+                          <block id="C,-^d|::,@u:ZkwmNw5-" type="controls_repeat_ext">
+                            <value name="TIMES">
+                              <shadow id="5gQl25](,usZc-eMm!?W" type="math_number">
+                                <field name="NUM">8</field>
+                              </shadow>
+                            </value>
+                            <statement name="DO">
+                              <block id="u84P(MLQ7x9%O0-P_9;*" type="led_block_b">
+                                <field name="NAME1">BR</field>
+                                <field name="Value">100</field>
+                                <next>
+                                  <block id="z?w:_OpCE4JSCR)k/O}o" type="robot_motion">
+                                    <field name="speed">0</field>
+                                    <field name="rad">5</field>
+                                    <next>
+                                      <block id="Kdd6!NKf4]C5O{D^W;g;" type="time">
+                                        <field name="Time">0.1</field>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block id="k$C+a#YWJEv]1S.je`tx" type="led_block_b">
+                                <field name="NAME1">BR</field>
+                                <field name="Value">0</field>
+                                <next>
+                                  <block id="S8L7vgVE|]5J)rD(hDT}" type="controls_repeat_ext">
+                                    <value name="TIMES">
+                                      <shadow id="@Tm{U7^b!5YZ$1R?e{b*" type="math_number">
+                                        <field name="NUM">5</field>
+                                      </shadow>
+                                    </value>
+                                    <statement name="DO">
+                                      <block id="XU4b#R.kTr3vGk3DWy?G" type="robot_motion">
+                                        <field name="speed">0.2</field>
+                                        <field name="rad">0</field>
+                                        <next>
+                                          <block id="Q8!~{WQ9}^]{8ty{JEE:" type="time">
+                                            <field name="Time">0.1</field>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
