@@ -41,7 +41,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/img/
     - assets/blockly/
     - assets/blockly/msg/
     - assets/blockly/msg/js/
@@ -54,7 +53,6 @@ flutter:
     - assets/blockly/generators/python/
     - assets/blockly/media/
     - assets/blockly/blocks/
-    - assets/web/
     - assets/demo/
 
   # The following line ensures that the Material Icons font is
